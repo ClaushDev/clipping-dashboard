@@ -1,0 +1,31 @@
+[project]
+name = "clipping"
+version = "0.1.0"
+description = "Herramienta local para sacar clips verticales de vídeos largos y editarlos"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "sqlmodel>=0.0.22",
+    "python-multipart>=0.0.12",
+    "httpx>=0.27",
+    "yt-dlp>=2025.1.1",
+    "faster-whisper>=1.1.1",
+    # DLLs de CUDA 12 / cuDNN 9 para CTranslate2 (faster-whisper) en Windows; sin GPU NVIDIA se usa la CPU
+    "nvidia-cublas-cu12>=12.4,<13",
+    "nvidia-cudnn-cu12>=9.1,<10",
+    "opencv-python-headless>=4.10",
+    "numpy>=1.26",
+    # Diarización (quién habla cuándo) para «seguir a quien habla»
+    "sherpa-onnx>=2.0.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -1,0 +1,22 @@
+# Datos de la app (vídeos, clips, base de datos, modelos descargados, registros)
+data/
+
+# Python
+.python/
+**/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.remotion-bundle/
+frontend/tsconfig.tsbuildinfo
+
+# Varios
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

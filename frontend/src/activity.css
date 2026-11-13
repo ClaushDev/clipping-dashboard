@@ -1,0 +1,63 @@
+/* Panel fijo «Actividad»: qué corre, en qué paso y con qué modelo. */
+.act-dock {
+  position: fixed; right: 16px; bottom: 16px; z-index: 60; width: min(400px, calc(100vw - 32px));
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px; pointer-events: none;
+}
+.act-dock > * { pointer-events: auto; }
+.act-pill {
+  display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--border-strong); background: var(--panel); color: var(--text); box-shadow: var(--shadow-pop);
+  font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  transition: border-color 160ms ease-out, transform 160ms ease-out;
+}
+.act-pill:hover { border-color: var(--muted); }
+.act-pill:active { transform: scale(0.98); }
+.act-pill-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.act-dock.pulse .act-pill { border-color: var(--sel); box-shadow: 0 0 0 3px var(--sel-soft), var(--shadow-pop); }
+.act-time { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 500; white-space: nowrap; }
+.act-body {
+  width: 100%; max-height: min(70vh, 640px); overflow: auto; display: flex; flex-direction: column; gap: 10px;
+  padding: 12px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--panel);
+  box-shadow: var(--shadow-pop); animation: act-in 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes act-in { from { opacity: 0; transform: translateY(6px) scale(0.98); } to { opacity: 1; transform: none; } }
+.act-job { display: flex; flex-direction: column; gap: 8px; }
+.act-job + .act-job { border-top: 1px solid var(--border); padding-top: 10px; }
+.act-job > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.act-job > footer { font-variant-numeric: tabular-nums; }
+.act-stage { color: var(--text); }
+.act-next { border-top: 1px solid var(--border); padding-top: 8px; }
+.act-steps { display: flex; flex-direction: column; gap: 4px; }
+.act-step.done {
+  display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; column-gap: 8px; align-items: center; font-size: 12px;
+}
+.act-step.done .act-step-model { grid-column: 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11.5px; }
+.act-step.done .act-time { grid-column: 3; grid-row: 1; }
+.act-step.done.bad .act-step-label { color: var(--danger); }
+.act-step .ok { color: var(--ok); }
+.act-step .danger { color: var(--danger); }
+.act-step-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.act-step.live {
+  display: flex; flex-direction: column; gap: 6px; padding: 10px; margin-top: 2px; border-radius: var(--radius-sm);
+  background: var(--panel-2); border: 1px solid var(--border);
+}
+.act-step-head { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+.act-step-head .act-step-label { flex: 1; }
+.act-model { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; }
+.act-chip {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
+}
+.act-chip.ai { color: var(--violet); background: var(--violet-bg); }
+.act-chip.local { color: var(--info); background: var(--info-bg); }
+.act-hint { font-size: 11.5px; color: var(--muted); }
+.act-bar { position: relative; height: 4px; border-radius: 999px; background: var(--panel-3); overflow: visible; }
+.act-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--sel); transition: width 600ms linear; }
+.act-bar.slow > span { background: var(--warn); }
+.act-bar > i { position: absolute; top: -3px; width: 2px; height: 10px; border-radius: 1px; background: var(--text); opacity: 0.5; }
+/* Cola: los pasos de cada trabajo */
+.job-steps { display: flex; flex-direction: column; gap: 4px; padding: 8px 0 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .act-body { animation: none; }
+  .act-bar > span { transition: none; }
+}
+.job-steps-wrap .btn.small.ghost { padding-left: 0; color: var(--muted); }
