@@ -25,6 +25,8 @@ dev = ["pytest>=8"]
 
 [tool.uv]
 package = false
+# La herramienta es para Windows: solo versiones con paquetes para Windows de 64 bits
+required-environments = ["sys_platform == 'win32' and platform_machine == 'AMD64'"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
